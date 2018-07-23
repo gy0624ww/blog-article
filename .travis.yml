@@ -27,7 +27,7 @@ after_success:
   - git push --force https://$DEPLOY_TOKEN@github.com/gy0624ww/blog-article.git master
   # Trigger all tags/branchs for this automated build.
   #- curl -X POST https://registry.hub.docker.com/u/gy0624ww/blog-dockerfiles/trigger/66b7a9b2-b17c-471f-ab14-ab015b05d362/  #本句的链接是hub.docker.com 自动生成，进入docker项目后，Building Settings - Build Triggers - Activate Triggers ，复制 Trigger URL
-  - sleep 5m #超过10分钟，tavis 将失去响应。此处是在等待 docker 镜像更新
+  #- sleep 5m #超过10分钟，tavis 将失去响应。此处是在等待 docker 镜像更新
   - ssh root@39.105.90.225 -p 22 -o StrictHostKeyChecking=no "docker restart gy0624ww/guanyue_blog"  #ssh 连接后，重启 docker 容器, jekyll_blog 为之前设定的容器名。
     #- ssh root@39.105.90.225 -p 22 -o StrictHostKeyChecking=no "docker pull gy0624ww/blog-dockerfiles && docker stop guanyue_blog && docker rm guanyue_blog && docker run --name=guanyue_blog -d -p 39100:80 --privileged=true gy0624ww/blog-dockerfiles:latest"  #ssh 连接后，重启 docker 容器, jekyll_blog 为之前设定的容器名。
 
